@@ -36,7 +36,8 @@ public class Course implements Serializable {
 	@Column(name = "COURSE_NAME")
 	private String courseName;
 	
-	@ManyToMany(mappedBy = "courses", fetch = FetchType.LAZY)
+	
+	@ManyToMany(mappedBy = "courses", fetch = FetchType.EAGER)
 	@JsonIgnore
-	private Set<Student> students = new HashSet<>();
+	private Set<Student> students = new HashSet<Student>();
 }

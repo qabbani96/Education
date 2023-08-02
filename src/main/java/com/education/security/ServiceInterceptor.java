@@ -39,6 +39,7 @@ public class ServiceInterceptor  implements HandlerInterceptor{
 		
 		String token = request.getHeader("token");
 		
+		
 		ResponseBody checkTokenExisting2 = checkTokenExisting(token);
 		
 		System.out.println("checkTokenExisting : "+checkTokenExisting2);
@@ -65,7 +66,7 @@ public class ServiceInterceptor  implements HandlerInterceptor{
 	
 	public ResponseBody loadByAccessToken(String token) {
 		Map<String, Object> result = new HashMap<String, Object>();
-		Student std = studentRepo.findByAccessToken(token);
+		Map<String, Object> std = studentRepo.findByAccessToken(token);
 		
 		if(std == null) {
 			result.put("massage", "user not found");

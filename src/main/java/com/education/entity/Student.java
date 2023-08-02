@@ -20,7 +20,10 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,9 +32,7 @@ import java.io.Serializable;
 
 @Entity
 @Table(name = "student")
-@Setter
-@Getter
-@ToString
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Student implements Serializable{
@@ -69,6 +70,7 @@ public class Student implements Serializable{
 	private String password;
 	
 	@ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.PERSIST)
+	
 	@JoinTable(name = "students_courses",
 	  joinColumns = {
 			  @JoinColumn(name = "student_id",referencedColumnName = "id",nullable = false , updatable = false)

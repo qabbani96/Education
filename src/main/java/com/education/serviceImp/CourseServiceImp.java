@@ -18,6 +18,7 @@ import com.education.repository.CourseRepository;
 import com.education.service.CourseService;
 
 @Component
+
 public class CourseServiceImp implements CourseService{
 
 	@Autowired

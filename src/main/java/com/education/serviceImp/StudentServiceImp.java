@@ -19,9 +19,11 @@ import com.education.entity.ResponseBody;
 import com.education.entity.Student;
 import com.education.repository.CourseRepository;
 import com.education.repository.StudentRepository;
+import com.education.security.JWTHandler;
 import com.education.service.StudentService;
 
 @Component
+
 public class StudentServiceImp implements StudentService{
 
 	@Autowired
@@ -29,6 +31,9 @@ public class StudentServiceImp implements StudentService{
 	
 	@Autowired
 	CourseRepository courseRepo;
+	
+	@Autowired
+	JWTHandler jwtHandler;
 	
 	@Autowired
 	private BCryptPasswordEncoder bCryptPasswordEncoder;
@@ -52,6 +57,7 @@ public class StudentServiceImp implements StudentService{
 		}
 		try {
 			student.setPassword(bCryptPasswordEncoder.encode(student.getPassword()));
+			
 			studentRepo.save(student);
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -154,7 +160,7 @@ public class StudentServiceImp implements StudentService{
 				return new ResponseEntity<ResponseBody>(new ResponseBody("failed",result),HttpStatus.BAD_REQUEST);
 			}
 			Pageable pageable = PageRequest.of(page, size);
-			 listStd = studentRepo.findAll(pageable);
+			 listStd = (List<Student>) studentRepo.findAll(pageable);
 			
 		}catch(Exception e) {
 			e.printStackTrace();
